@@ -1,0 +1,22 @@
+{
+  "version": "refresh-rules-v1",
+  "width": 790,
+  "screens_limit": 16,
+  "height_limit": 16000,
+  "brand": {"minimum_logo_width": 150, "minimum_tagline_width": 300, "clear_space_ratio": 0.1},
+  "screen": {"minimum_height": 460, "maximum_height": 3000, "minimum_safe_margin": 20, "draft_strip_height": 46},
+  "palettes": {
+    "warm": {"paper": "#faf4e7", "ink": "#38271d", "accent": "#755037"},
+    "green": {"paper": "#eef1df", "ink": "#303d26", "accent": "#4d613d"},
+    "dark": {"paper": "#3b2922", "ink": "#fff4e4", "accent": "#eed0a8"},
+    "neutral": {"paper": "#f8f5ef", "ink": "#362b22", "accent": "#6f5848"}
+  },
+  "modules": {
+    "hero": {"screen_height": 1080, "product_height_ratio": 0.65, "kicker_size": 24, "title_size": 54, "subtitle_size": 30, "body_size": 25},
+    "visual": {"screen_height": 1050, "product_height_ratio": 0.58, "kicker_size": 22, "title_size": 48, "subtitle_size": 28, "body_size": 24},
+    "info": {"screen_height": 1000, "kicker_size": 22, "title_size": 48, "subtitle_size": 28, "body_size": 23}
+  },
+  "lighting": ["upper_left", "upper_right", "diffuse"],
+  "pending_display": "内部评审稿 · 旧页转录与包装待核准",
+  "brand_pending_display": "品牌标志待核准"
+}

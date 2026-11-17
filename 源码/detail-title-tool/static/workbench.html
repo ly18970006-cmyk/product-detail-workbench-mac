@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN" data-workbench>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>商品详情页工作台</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/workbench.css">
+  <script src="/static/app.js" defer></script>
+  <script src="/static/workbench.js" defer></script>
+</head>
+<body>
+<main>
+  <header class="workbench-header">
+    <h1>商品详情页工作台</h1>
+    <form id="edit-form" aria-label="查找商品">
+      <label for="code">商品编码</label>
+      <div class="code-field">
+        <input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]{8,16}" maxlength="16" required autocomplete="off" list="codes">
+        <button type="submit" class="secondary" id="lookup">查找</button>
+      </div>
+      <datalist id="codes"></datalist>
+    </form>
+    <div id="product" class="product" hidden>
+      <div class="bottle-frame" id="bottle-frame"><img id="bottle" alt=""></div>
+      <div>
+        <strong id="product-name"></strong>
+        <p id="template"></p>
+        <p id="bottle-name"></p>
+        <p id="product-note" class="note" hidden></p>
+      </div>
+    </div>
+  </header>
+  <p id="lookup-status" class="note" role="status" aria-live="polite"></p>
+  <nav id="modes" class="mode-bar" aria-label="工作模式">
+    <button type="button" class="secondary" id="mode-edit" aria-pressed="true">改字</button>
+    <button type="button" class="secondary" id="mode-refresh" aria-pressed="false">翻新</button>
+    <p class="note" id="capability-summary"></p>
+  </nav>
+
+  <div class="workspace">
+    <aside class="editor">
+      <div id="edit-panel">
+        <h2>改字</h2>
+        <p id="edit-capability" class="note mode-note"></p>
+        <div id="edit-source-row" hidden>
+          <label for="edit-source">改字来源</label>
+          <select id="edit-source"></select>
+        </div>
+        <p id="edit-provenance" class="note mode-note" hidden></p>
+        <div class="layer-editor" id="layer-editor" hidden>
+          <label for="layer-text" id="layer-name">图层文案</label>
+          <p id="layer-screen" class="note"></p>
+          <textarea id="layer-text" rows="4" spellcheck="false" aria-describedby="status"></textarea>
+        </div>
+        <p class="note" id="edit-hint" hidden>点击改后画面中的真实文字层。合成在图片或瓶贴内的文字无法单独点选。</p>
+        <button type="button" class="secondary" id="locate-error" aria-controls="layer-editor after-scroll" hidden>定位到出错文字</button>
+        <button type="button" class="secondary" id="retry" hidden>重试更新</button>
+      </div>
+      <div id="refresh-panel" hidden>
+        <h2>翻新</h2>
+        <p id="refresh-capability" class="note mode-note"></p>
+        <p id="refresh-model" class="note mode-note"></p>
+        <form id="refresh-materials" hidden>
+          <label>旧详情页<select name="old_page" required></select></label>
+          <label>透明瓶图<select name="bottle"></select></label>
+          <label>运营资料<select name="operations"></select></label>
+          <label>品牌标志<select name="logo"></select></label>
+          <button type="submit" class="secondary">登记素材</button>
+        </form>
+        <p id="refresh-missing" class="note mode-note" hidden></p>
+        <label id="refresh-plan-mode-row" hidden>分屏方式
+          <select id="refresh-plan-mode">
+            <option value="local_review">本地分屏</option>
+            <option value="company">公司模型分屏</option>
+          </select>
+        </label>
+        <button type="button" id="refresh-plan" hidden>分析分屏</button>
+        <div id="refresh-screens" hidden>
+          <label for="refresh-scope">翻新范围</label>
+          <select id="refresh-scope"><option value="all">整页</option></select>
+          <label id="refresh-preview-mode-row" hidden>背景来源
+            <select id="refresh-preview-mode">
+              <option value="local_review">本地试排背景</option>
+              <option value="company">公司模型场景</option>
+            </select>
+          </label>
+          <p id="refresh-preview-scope-note" class="note" hidden></p>
+          <button type="button" id="refresh-preview">生成翻新预览</button>
+        </div>
+        <button type="button" class="secondary" id="refresh-query" hidden>查询原任务</button>
+        <button type="button" class="secondary" id="refresh-retry" hidden>重试</button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+    </aside>
+
+    <section class="results" aria-labelledby="result-title">
+      <header class="results-header">
+        <h2 id="result-title">整页对照</h2>
+        <p class="note">两侧同步滚动</p>
+        <a id="refresh-full-old" hidden target="_blank" rel="noopener">查看完整上线旧页</a>
+        <a id="refresh-full-new" hidden target="_blank" rel="noopener">打开翻新 PNG</a>
+        <a id="refresh-full-comparison" hidden target="_blank" rel="noopener">打开同宽对照</a>
+        <a id="refresh-baseline-comparison" hidden target="_blank" rel="noopener">与冻结首屏对照</a>
+        <a id="refresh-scene-candidate" hidden target="_blank" rel="noopener">查看场景候选</a>
+      </header>
+      <div class="comparisons">
+        <figure>
+          <figcaption id="after-label">改后</figcaption>
+          <div class="viewport" id="after-scroll" tabindex="0" aria-labelledby="after-label">
+            <div class="sheet" id="after-sheet" hidden>
+              <img id="after" alt="改后的整页详情" draggable="false">
+              <div class="hotspots" id="hotspots"></div>
+            </div>
+            <p id="after-empty" class="empty">查找商品后显示整页</p>
+          </div>
+        </figure>
+        <figure>
+          <figcaption id="before-label">改前</figcaption>
+          <div class="viewport" id="before-scroll" tabindex="0" aria-labelledby="before-label">
+            <div class="sheet" id="before-sheet" hidden>
+              <img id="before" alt="原稿" draggable="false">
+            </div>
+            <p id="before-empty" class="empty">查找商品后显示整页</p>
+          </div>
+        </figure>
+      </div>
+      <footer class="actions" id="actions" hidden>
+        <button type="button" id="confirm" disabled>确认并导出</button>
+        <a class="button secondary" id="download-psd" hidden download>下载 PSD</a>
+        <a class="button secondary" id="download-png" hidden download>下载 PNG</a>
+        <button type="button" class="secondary" id="refresh-open-edit" hidden>打开已确认稿改字</button>
+      </footer>
+    </section>
+  </div>
+</main>
+</body>
+</html>

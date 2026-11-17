@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>详情页改字</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <h1>详情页改字</h1>
+    </header>
+    <div class="workspace">
+      <aside class="editor">
+        <form id="edit-form">
+          <label for="code">商品编码</label>
+          <div class="code-field">
+            <input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]{8,16}" maxlength="16" required autocomplete="off" list="codes">
+            <button type="button" class="secondary" id="lookup">查找</button>
+          </div>
+          <datalist id="codes"></datalist>
+          <div id="product" class="product" hidden>
+            <div class="bottle-frame"><img id="bottle" alt=""></div>
+            <div>
+              <strong id="product-name"></strong>
+              <p id="template"></p>
+              <p id="bottle-name"></p>
+            </div>
+          </div>
+          <p id="product-note" class="note" hidden></p>
+        </form>
+        <div class="layer-editor" id="layer-editor" hidden>
+          <label for="layer-text" id="layer-name">图层文案</label>
+          <p id="layer-screen" class="note"></p>
+          <textarea id="layer-text" rows="4" spellcheck="false" aria-describedby="status"></textarea>
+        </div>
+        <p class="note" id="edit-hint" hidden>点击左侧画面中的文字开始编辑。合成在图片或瓶贴内的文字无法单独点选。</p>
+        <p id="status" role="status" aria-live="polite"></p>
+        <button type="button" class="secondary" id="locate-error" aria-controls="layer-editor after-scroll" hidden>定位到出错文字</button>
+        <button type="button" class="secondary" id="retry" hidden>重试更新</button>
+      </aside>
+
+      <section class="results" aria-labelledby="result-title">
+        <header class="results-header">
+          <h2 id="result-title">整页对照</h2>
+          <p class="note">两侧同步滚动</p>
+        </header>
+        <div class="comparisons">
+          <figure>
+            <figcaption id="after-label">改后 <span>点击文字编辑</span></figcaption>
+            <div class="viewport" id="after-scroll" tabindex="0" aria-labelledby="after-label">
+              <div class="sheet" id="after-sheet" hidden>
+                <img id="after" alt="改后的整页详情" draggable="false">
+                <div class="hotspots" id="hotspots"></div>
+              </div>
+              <p id="after-empty" class="empty">查找商品后显示整页</p>
+            </div>
+          </figure>
+          <figure>
+            <figcaption id="before-label">改前</figcaption>
+            <div class="viewport" id="before-scroll" tabindex="0" aria-labelledby="before-label">
+              <div class="sheet" id="before-sheet" hidden>
+                <img id="before" alt="改前的整页详情" draggable="false">
+              </div>
+              <p id="before-empty" class="empty">查找商品后显示整页</p>
+            </div>
+          </figure>
+        </div>
+        <footer class="actions" id="actions" hidden>
+          <button type="button" id="confirm" disabled>确认并导出</button>
+          <a class="button secondary" id="download-psd" hidden>下载 PSD</a>
+          <a class="button secondary" id="download-png" hidden>下载 PNG</a>
+        </footer>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

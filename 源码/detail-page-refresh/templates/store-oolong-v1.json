@@ -1,0 +1,66 @@
+{
+  "version": "store-oolong-v1",
+  "series": "三得利乌龙茶",
+  "width": 790,
+  "layouts": {
+    "shop_hero": {
+      "label": "店铺首屏 · 中央主瓶",
+      "screen_id": "hero",
+      "height": 1080,
+      "product": [216, 308, 574, 1014],
+      "product_safe": [200, 298, 590, 1029],
+      "brand": [42, 24, 395, 70],
+      "brand_plate": [24, 12, 420, 84],
+      "status": [443, 28, 751, 65],
+      "slots": [
+        {"role": "kicker", "area": [174, 88, 616, 127], "size": 23, "color": "#785024", "align": "center", "lines": 1},
+        {"role": "title", "area": [84, 122, 706, 298], "size": 64, "color": "#3a2116", "align": "center", "leading": 80, "lines": 2},
+        {"role": "subtitle", "area": [546, 604, 750, 672], "size": 34, "color": "#633e24", "align": "left", "lines": 1},
+        {"role": "footnote", "area": [39, 1025, 751, 1067], "size": 22, "color": "#62452f", "align": "left", "lines": 1}
+      ],
+      "art": {
+        "glow": [135, 241, 655, 1016],
+        "contours": [100, 269, 691, 979],
+        "ground": [0, 856, 790, 1021],
+        "left_leaves": [8, 760, 220, 997],
+        "right_leaves": [599, 741, 789, 987],
+        "subtitle_rule": [550, 591, 623, 594]
+      }
+    },
+    "shop_benefits": {
+      "label": "店铺卖点 · 左瓶右四组",
+      "screen_id": "selling",
+      "height": 1150,
+      "product": [40, 389, 283, 1033],
+      "product_safe": [24, 369, 297, 1050],
+      "status": [443, 28, 751, 65],
+      "slots": [
+        {"role": "kicker", "area": [46, 70, 307, 111], "size": 23, "color": "#4a6438", "align": "left", "lines": 1},
+        {"role": "title", "area": [46, 126, 538, 324], "size": 70, "color": "#263720", "align": "left", "leading": 85, "lines": 2},
+        {"role": "body", "area": [433, 413, 727, 481], "size": 27, "color": "#30412a", "align": "left", "lines": 1, "icon": "formula"},
+        {"role": "body", "area": [433, 538, 727, 632], "size": 27, "color": "#30412a", "align": "left", "leading": 37, "lines": 2, "icon": "taste"},
+        {"role": "body", "area": [433, 694, 727, 788], "size": 27, "color": "#30412a", "align": "left", "leading": 37, "lines": 2, "icon": "leaves"},
+        {"role": "body", "area": [433, 876, 738, 947], "size": 26, "color": "#30412a", "align": "left", "leading": 36, "lines": 1, "icon": "polyphenol"},
+        {"role": "footnote", "area": [46, 1074, 744, 1120], "size": 22, "color": "#4a5b40", "align": "left", "lines": 1}
+      ],
+      "art": {
+        "glow": [3, 298, 376, 1065],
+        "leaves": [545, 95, 789, 343],
+        "ground": [9, 960, 324, 1050],
+        "title_rule": [50, 322, 154, 326],
+        "cards": [
+          [317, 359, 753, 498],
+          [317, 513, 753, 652],
+          [317, 667, 753, 806],
+          [317, 821, 753, 960]
+        ],
+        "icons": [
+          [341, 390, 411, 460],
+          [341, 548, 411, 618],
+          [341, 702, 411, 772],
+          [341, 857, 411, 927]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schema_version", "width", "screens"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "width": {"const": 790},
+    "screens": {"type": "array", "minItems": 1, "maxItems": 16, "items": {"$ref": "#/$defs/screen"}}
+  },
+  "$defs": {
+    "box": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "integer", "minimum": 0}},
+    "slot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["box", "size", "leading", "orientation", "align"],
+      "properties": {
+        "box": {"$ref": "#/$defs/box"},
+        "size": {"type": "integer", "minimum": 18, "maximum": 90},
+        "leading": {"type": "integer", "minimum": 18, "maximum": 150},
+        "orientation": {"enum": ["horizontal", "vertical"]},
+        "align": {"enum": ["left", "center", "right"]}
+      }
+    },
+    "screen": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "old_range", "height", "palette", "lighting", "scene_profile", "bottle_box", "brand_box", "slots", "preserve", "composition"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]{1,96}$"},
+        "old_range": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 0}},
+        "height": {"type": "integer", "minimum": 460, "maximum": 3000},
+        "palette": {"enum": ["warm", "green", "dark", "neutral"]},
+        "lighting": {"enum": ["upper_left", "upper_right", "diffuse"]},
+        "scene_profile": {"enum": ["tea_still_life", "fruit_still_life", "tabletop", "studio", "informational"]},
+        "bottle_box": {"anyOf": [{"$ref": "#/$defs/box"}, {"type": "null"}]},
+        "brand_box": {"anyOf": [{"$ref": "#/$defs/box"}, {"type": "null"}]},
+        "slots": {"type": "object", "additionalProperties": {"$ref": "#/$defs/slot"}},
+        "preserve": {"type": "array", "uniqueItems": true, "items": {"enum": ["registered_copy", "actual_product", "module_order", "unapproved_brand_placeholder", "source_light_direction"]}},
+        "composition": {"enum": ["center_product", "left_copy", "right_copy", "top_copy", "info_grid"]}
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>详情页翻新</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+<header class="top"><span>康之诚 · AI 详情页</span><span class="flag">内部草稿 · 本地背景</span></header>
+<main>
+  <h1>详情页翻新</h1>
+  <form id="lookup" class="lookup">
+    <label>商品编码<input id="code" value="924338157225" inputmode="numeric" pattern="[0-9]{10,16}" required></label>
+    <button>读取商品</button>
+  </form>
+  <p id="status" role="status" aria-live="polite"></p>
+  <div id="work" class="work" hidden>
+    <section class="controls" aria-label="排版设置">
+      <h2 id="product"></h2>
+      <label id="layout-choice" hidden>版式<select id="layout-mode">
+        <option value="store">店铺版 · 首屏与核心卖点</option>
+        <option value="standard">原技术版式</option>
+      </select></label>
+      <div class="subrow"><strong>选择页面模块</strong><a id="old-page" target="_blank" rel="noopener">查看旧页 ↗</a></div>
+      <div id="screens" class="screens"></div>
+      <details id="adjust"><summary>调整本屏草稿</summary>
+        <label>模块<select id="edit-screen"></select></label>
+        <div id="edit-fields"></div>
+      </details>
+      <details><summary>商品与品牌核准状态</summary><ul id="approvals"></ul></details>
+      <button id="preview-button" type="button">生成草图</button>
+      <form id="confirm" hidden>
+        <label>内部确认人<input id="reviewer" placeholder="填写姓名" maxlength="60" required></label>
+        <button>确认并导出 PSD / PNG</button>
+      </form>
+      <nav id="downloads" aria-label="成稿下载" hidden></nav>
+    </section>
+    <section class="proof" aria-label="草图预览">
+      <div class="proof-title"><h2>草图预览</h2><a id="full-preview" target="_blank" rel="noopener" hidden>原尺寸 ↗</a></div>
+      <p id="empty">选择模块，生成草图后核对文字、瓶图和背景。</p>
+      <img id="preview" alt="当前详情页草图" hidden>
+    </section>
+  </div>
+</main>
+</body>
+</html>
